@@ -1,11 +1,11 @@
 pipeline {
     agent any
     stages {
-        stage('install dependancies'){
-            steps {
-                // sh 'gem install cucumber'
-            }
-        }
+        // stage('install dependancies'){
+        //     steps {
+        //         // sh 'gem install cucumber'
+        //     }
+        // }
          stage('version'){
             steps{
                 sh 'ruby --version'
