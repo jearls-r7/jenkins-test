@@ -3,11 +3,6 @@ pipeline {
     stages {
         stage('install dependancies'){
             steps {
-                // sh 'curl -sSL https://get.rvm.io | bash -s stable'
-                // sh 'rvm install 2.7.6'
-                // sh 'rvm use 2.7.6'
-                sh 'brew install chruby ruby-install'
-                sh 'ruby-install ruby'
                 sh 'gem install cucumber'
             }
         }
