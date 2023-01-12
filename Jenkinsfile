@@ -6,7 +6,7 @@ pipeline {
                 // sh 'curl -sSL https://get.rvm.io | bash -s stable'
                 // sh 'rvm install 2.7.6'
                 // sh 'rvm use 2.7.6'
-                sh 'gem install cucumber'
+                sh 'gem install cucumber --user-install'
             }
         }
          stage('version'){
