@@ -8,7 +8,9 @@ pipeline {
         // }
          stage('version'){
             steps{
-                sh 'ruby --version'
+                sh 'rbenv install 2.7.6'
+                sh 'rbenv global 2.7.6'
+                sh 'ruby -v'
                 sh 'cucumber --version'
             }
         }
