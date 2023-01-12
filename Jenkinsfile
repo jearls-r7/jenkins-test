@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('install dependancies'){
             steps {
-                sh 'gem install cucumber'
+                // sh 'gem install cucumber'
             }
         }
          stage('version'){
