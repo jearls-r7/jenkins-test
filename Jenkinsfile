@@ -8,6 +8,7 @@ pipeline {
         // }
          stage('version'){
             steps{
+                sh ''
                 sh 'rbenv install 2.7.6'
                 sh 'rbenv global 2.7.6'
                 sh 'ruby -v'
