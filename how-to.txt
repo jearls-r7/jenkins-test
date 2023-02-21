@@ -1,0 +1,42 @@
+####################################
+###      Steps for Cucumber      ###
+####################################
+1. Build jenkins-master container
+2. Run jenkins-master container
+3. Ensure datadog-agent service is running
+4. Kick off desired jenkins job
+5. DD agent should post results to datadog
+
+####################################
+###      Steps for Robot         ###
+####################################
+1. Build jenkins-master container
+2. Run jenkins-master container
+3. Ensure Datadog CI CLI is installed on jenkins node
+4. Ensure robot test is generating compatable test file (-x)
+5. Kick off desired jenkins job
+6. Ensure pipeline runs CLI command to send results to datadog
+
+######################################
+### Build jenkins-master container ###
+######################################
+$ docker build -t myjenkins .
+
+####################################
+### Run jenkins-master container ###
+####################################
+$ docker run -p 8080:8080 -p 50000:50000 -t -i  --name=jenkins-master -v jenkins-state:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock  myjenkins
+
+######################################################
+### Run Robot Tests  generate compatable test file ###
+######################################################
+$ robot -x junit.xml  *.robot
+$ pabot -x junit.xml rest_api
+
+######################################################
+###          Send Robot Results to Datadog         ###
+######################################################
+$ DATADOG_API_KEY=<placeholder-key> DD_ENV=ci DATADOG_SITE=datadoghq.eu datadog-ci junit upload \
+  --service <placeholder-service-name> \
+  <placeholder-path>
+
