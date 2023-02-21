@@ -1,0 +1,15 @@
+
+version: '3.4'
+
+services:
+  cucumber_tests:
+    container_name: cucumber_tests
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cucumber_image
+    volumes: 
+      - cucumber_results:/cucumber_results
+      - /var/run/docker.sock:/var/run/docker.sock
+volumes:
+    cucumber_results:
