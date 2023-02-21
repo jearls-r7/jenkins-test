@@ -1,23 +1,21 @@
 pipeline {
     agent any
     stages {
-        // stage('install dependancies'){
-        //     steps {
-        //         // sh 'gem install cucumber'
-        //     }
-        // }
-         stage('version'){
+        stage('Copy Test Files To Pipeline Directory'){
             steps{
-                sh ''
-                sh 'rbenv install 2.7.6'
-                sh 'rbenv global 2.7.6'
-                sh 'ruby -v'
-                sh 'cucumber --version'
+            sh "cp -a /tests/. /var/jenkins_home/workspace/test_job"
             }
         }
-        stage('run test'){
+         stage('Build Container Image'){
             steps{
-                sh 'cucumber features/is_it_friday_yet.feature'
+                sh """docker-compose -f docker-compose.yml up --build -d
+                        echo "Checking current images"
+                        docker images"""
+            }
+        }
+        stage('Run Test'){
+            steps{
+                sh 'docker run hello_cucumber'
             }
         }
     }
